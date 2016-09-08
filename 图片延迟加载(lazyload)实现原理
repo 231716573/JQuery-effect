@@ -1,0 +1,21 @@
+/*
+*  图片的src 实现原理
+*/
+
+$(function (){
+  var viewportHeight = $(window).height();
+  var lazyload =function (){
+    //获取窗口滚动条距离
+    var scrollTop = $(window).scrollTop;
+    
+    $('img').each(function (){
+      //判断 视口高度+滚动条距离 与 图片距离文档远点的高度
+      var x = scrollTop + viewportHeight - $(this).position().stop;
+      //如果大于0 即该元素能被浏览者看到，则将暂存于自定义属性loadpic的值赋值给真正的src
+      if(x > 0){
+        $(this).attr('src',$(this).attr('loadpic'));
+      }
+    })
+  }
+  setInterval(lazyload,1000);
+})
