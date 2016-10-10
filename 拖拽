@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>document</title>
+<style type="text/css">
+#div1{
+	height: 100px;
+	width: 100px;
+	background-color: #ccc;
+	position: absolute;
+	left: 0;
+	top: 0;
+}	
+</style>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$(function (){
+  $("#div1").mousedown(function (ev){
+    var disX = ev.pageX-$("#div1").offset().left;
+    var disY = ev.pageY-$("#div1").offset().top;
+    
+    function fn1(ev){
+      var x = ev.pageX - disX;
+      var y = ev.pageY - disY;
+      
+      $("#div1").css({
+        left: x,
+        top: y
+      });
+    }
+    
+    $(document).mousemove(fn1);
+    $(document).mouseup(function (){
+      $(document).unbind("mousemove", fn1);
+    })
+    
+  })
+})
+</script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+
+</html>
